@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "Inter";
+  src: url("@/shared/assets/fonts/Inter-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("@/shared/assets/fonts/Manrope-VariableFont_wght.ttf");
+}
+@font-face {
+  font-weight: 700;
+  font-family: "Roboto";
+  src: url("@/shared/assets/fonts/static/Roboto-Bold.ttf");
+}
+@font-face {
+  font-weight: 400;
+  font-family: "Roboto";
+  src: url("@/shared/assets/fonts/static/Roboto-Regular.ttf");
+}
+@font-face {
+  font-weight: 500;
+  font-family: "Roboto";
+  src: url("@/shared/assets/fonts/static/Roboto-Medium.ttf");
+}
+@font-face {
+   font-family: "Noto Sans SC";
+   src: url("@/shared/assets/fonts/NotoSansSC-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  word-wrap: break-word;
+  background-color: var(--el-bg-color);
+}
+
+.el-button + .el-button {
+  margin-left: 0 !important;
+} 
+
+.el-form-item {
+  margin-bottom: 0 !important;
+}
+
+.el-form-item__content {
+  line-height: normal !important;
+}
+
+.el-popover.el-popper.audio-popper {
+  min-width: auto;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.audio-popper .el-popper__arrow {
+  display: none;
+}
+
+.el-message-box__btns {
+  gap: 10px;
+}
+
+.el-message-box {
+  --el-messagebox-width: 474px;
+}
+
+.el-table th.el-table__cell.is-leaf,
+.el-table td.el-table__cell {
+  background: white;
+}
+
+.el-table__inner-wrapper::before {
+  display: none;
+}
+
+.el-table .cell {
+  font-weight: 400;
+}
+
+.el-form-item__label {
+  color: #000000 !important;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.el-popover {
+  --el-popover-padding: 15px !important;
+}
+
+.el-popper__arrow {
+  display: none;
+}
+
+.el-form--default.el-form--label-top .el-form-item .el-form-item__label {
+  margin-bottom: 2px !important;
+}
+
+// .el-date-editor--timerange,
+// .el-date-editor--daterange {
+//   position: relative;
+
+//   &::after {
+//     position: absolute;
+//     left: 40px;
+//     content: 'c';
+//   }
+
+//   .el-range__icon {
+//     margin-right: 30px !important;
+//   }
+  
+//   .el-range-input {
+//     width: 120px !important;
+//   }
+// }
+
+.el-button--info.is-plain, .el-button--info.is-text, .el-button--info.is-link {
+  --el-button-border-color: #909399 !important;
+}

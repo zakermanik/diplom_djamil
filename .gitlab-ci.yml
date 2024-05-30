@@ -1,0 +1,55 @@
+stages:
+  - build
+  - docker
+  - auto
+
+build:
+  stage: build
+  image: node:lts
+  cache:
+    paths:
+      - .npm/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run coverage
+    - npm run lint
+    - npm run build
+  retry: 2
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    when: always
+    name: dist-$CI_COMMIT_REF_NAME
+    paths:
+      - dist/
+    expire_in: 1 day
+    reports:
+      junit: coverage/junit-output.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+      codequality: coverage/codequality-report.json
+
+docker:
+  stage: docker
+  image: docker:latest
+  dependencies:
+    - build
+  before_script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY_URL
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - master
+
+103_region:
+  stage: auto
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - curl -X POST -F token=$TOKEN -F ref=master -F "variables[TAG]=latest" -F "variables[TRIGGER_JOB]=103_region" $TRIGGER_PIPELINE_URL_103
+  only:
+    - master
